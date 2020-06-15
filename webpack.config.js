@@ -21,12 +21,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.svg$/,
+        use: "react-svg-loader"
       }
     ]
   },
   resolve: { extensions: [".js"] },
   plugins: [HtmlWebpackConfig],
-  // optimization: { splitChunks: { chunks: "all" } },
+  optimization: { splitChunks: { chunks: "all" } },
   output: { path: path.resolve(__dirname, "build") },
   devServer: {
     inline: true,
