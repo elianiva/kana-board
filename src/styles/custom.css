@@ -8,3 +8,7 @@ h1 {
 body {
   font-family: "PT Sans", sans-serif;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
