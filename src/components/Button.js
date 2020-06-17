@@ -45,7 +45,7 @@ export default function Button({ type, onClick }) {
     case "addItem":
       return (
         <div
-          className="w-24 p-2 my-4 rounded-md  bg-green-300 hover:bg-green-400 text-blue-800 cursor-pointer"
+          className="w-24 p-2 rounded-md  bg-green-300 hover:bg-green-400 text-blue-800 cursor-pointer"
           onClick={onClick}
         >
           Add
@@ -54,7 +54,7 @@ export default function Button({ type, onClick }) {
     case "cancel":
       return (
         <div
-          className="mr-4 w-24 p-2 my-4 rounded-md  bg-gray-200 hover:bg-gray-300 text-blue-800 cursor-pointer"
+          className="mr-4 w-24 p-2 rounded-md  bg-gray-200 hover:bg-gray-300 text-blue-800 cursor-pointer"
           onClick={onClick}
         >
           Cancel
