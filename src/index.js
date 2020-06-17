@@ -6,7 +6,10 @@ import { createStore } from "redux"
 import { tableReducer } from "./store/reducers"
 import "./styles/styles.css"
 
-const store = createStore(tableReducer)
+const store = createStore(
+  tableReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <Provider store={store}>
