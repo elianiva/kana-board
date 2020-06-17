@@ -14,7 +14,7 @@ export const addItem = data => ({
 
 export const removeItem = id => ({
   type: REMOVE_ITEM,
-  payload: id
+  payload: { id }
 })
 
 export const editItem = id => ({

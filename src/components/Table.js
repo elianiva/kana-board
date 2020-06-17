@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import PropType from "prop-types"
 import Button from "./Button"
 import { useDispatch } from "react-redux"
-import { toggleAddItem } from "../store/actions"
+import { toggleAddItem, removeItem, editItem } from "../store/actions"
 
 export default function Table({ data, onClick }) {
   const dispatch = useDispatch()
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(true)
 
   return (
     <div className="mt-8 mb-2">
@@ -43,13 +43,22 @@ export default function Table({ data, onClick }) {
                 </td>
                 <td className="p-2">{col.context}</td>
                 <td className="p-2">
-                  {col.ownExample[0]}
+                  {col.myExample[0]}
                   <br />
-                  {col.ownExample[1]}
+                  {col.myExample[1]}
                 </td>
                 <td className="p-2 flex">
-                  <Button type="remove" onClick={() => console.log("hello")} />
-                  <Button type="edit" onClick={() => console.log("hello")} />
+                  <Button
+                    type="remove"
+                    onClick={() => {
+                      dispatch(removeItem(col._id))
+                      console.log(col._id)
+                    }}
+                  />
+                  <Button
+                    type="edit"
+                    onClick={() => dispatch(editItem(col._id))}
+                  />
                 </td>
               </tr>
             ))}
