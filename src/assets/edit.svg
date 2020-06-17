@@ -1,15 +1,7 @@
-<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0)">
-<rect width="18" height="18" fill="none"/>
-<path d="M7.86668 8.32571L13.1317 3.06065C13.327 2.86539 13.6436 2.86539 13.8388 3.06065L15.253 4.47487C15.4483 4.67013 15.4483 4.98671 15.253 5.18197L9.988 10.447C9.92294 10.5121 9.8412 10.5579 9.75176 10.5795L7.88757 11.0295C7.52412 11.1172 7.19648 10.7896 7.28421 10.4261L7.73419 8.56194C7.75578 8.4725 7.80162 8.39076 7.86668 8.32571Z" fill="none" stroke="#2c5282"/>
-<rect x="2" y="4" width="1" height="12" rx="0.5" fill="#2c5282"/>
-<rect x="2" y="15" width="12" height="1" rx="0.5" fill="#2c5282"/>
-<rect x="13" y="9" width="1" height="7" rx="0.5" fill="#2c5282"/>
-<rect x="2" y="4" width="8" height="1" rx="0.5" fill="#2c5282"/>
-</g>
-<defs>
-<clipPath id="clip0">
-<rect width="18" height="18" fill="none"/>
-</clipPath>
-</defs>
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="4" y="4" width="3" height="24" rx="1.5" fill="#2D3748"/>
+<rect x="4" y="4" width="15" height="3" rx="1.5" fill="#2D3748"/>
+<path d="M16.4605 15.8618L16.7092 15.0914L24.9722 6.82843L25.6336 7.48976L17.4593 15.664L16.4605 15.8618Z" fill="#2D3748" stroke="#2D3748" stroke-width="4"/>
+<rect x="4" y="25" width="24" height="3" rx="1.5" fill="#2D3748"/>
+<rect x="25" y="14" width="3" height="14" rx="1.5" fill="#2D3748"/>
 </svg>
