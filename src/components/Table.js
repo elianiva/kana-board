@@ -1,20 +1,17 @@
 import React, { useState } from "react"
 import PropType from "prop-types"
-import { format } from "date-fns"
 import Button from "./Button"
+import { useDispatch } from "react-redux"
+import { toggleAddItem } from "../store/actions"
 
-export default function Table({ data }) {
-  const date = format(new Date(), "iiii, dd MMMM yyyy")
+export default function Table({ data, onClick }) {
+  const dispatch = useDispatch()
   const [isOpen, setOpen] = useState(false)
-
-  const removeItem = id => {
-    return data.filter(id => data._id !== id)
-  }
 
   return (
     <div className="mt-8 mb-2">
       <div className="w-full text-left bg-gray-100 p-2 rounded-md flex items-center">
-        <span className="flex-auto text-blue-900">{date}</span>
+        <span className="flex-auto text-gray-800">{data.date}</span>
         <button
           className="text-xl text-gray-600 px-3 rounded-md cursor-pointer"
           onClick={() => setOpen(!isOpen)}
@@ -23,7 +20,7 @@ export default function Table({ data }) {
         </button>
       </div>
       {isOpen && (
-        <table className="w-full mx-auto text-center font-medium rounded-md my-4">
+        <table className="w-full mx-auto text-center font-medium rounded-md my-4 text-gray-800">
           <thead>
             <tr className="p-2 bg-blue-400">
               <th className="p-2 text-white">Kana</th>
@@ -35,7 +32,7 @@ export default function Table({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data.map(col => (
+            {data.cols.map(col => (
               <tr className="p-2 odd:bg-gray-200 border-b-2" key={col._id}>
                 <td className="p-2">{col.kana}</td>
                 <td className="p-2">{col.meaning}</td>
@@ -51,23 +48,14 @@ export default function Table({ data }) {
                   {col.ownExample[1]}
                 </td>
                 <td className="p-2 flex">
-                  <Button
-                    type="remove"
-                    onClick={(col._id) => {
-                      removeItem(col._id)
-                    }}
-                  />
-                  <Button type="edit" />
+                  <Button type="remove" onClick={() => console.log("hello")} />
+                  <Button type="edit" onClick={() => console.log("hello")} />
                 </td>
               </tr>
             ))}
             <tr>
-              <td className="p-2 border-b-2" colSpan="5">
-                THis is something that should be long enough to fill the table
-                row
-              </td>
-              <td className="p-2 border-b-2">
-                <Button type="add"></Button>
+              <td colSpan="6">
+                <Button type="add" onClick={() => dispatch(toggleAddItem())} />
               </td>
             </tr>
           </tbody>
@@ -78,5 +66,5 @@ export default function Table({ data }) {
 }
 
 Table.propTypes = {
-  data: PropType.array.isRequired
+  data: PropType.object.isRequired
 }
