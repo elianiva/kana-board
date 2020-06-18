@@ -4,12 +4,13 @@ import {
   EDIT_ITEM,
   ADD_TABLE,
   TOGGLE_ADD_ITEM,
-  TOGGLE_ADD_TABLE
+  PASS_TABLE_ID,
+  UNSET_TABLE_ID
 } from "./types"
 
-export const addItem = data => ({
+export const addItem = (id, data) => ({
   type: ADD_ITEM,
-  payload: data
+  payload: { id, data }
 })
 
 export const removeItem = id => ({
@@ -30,6 +31,11 @@ export const toggleAddItem = () => ({
   type: TOGGLE_ADD_ITEM
 })
 
-export const toggleAddTable = () => ({
-  type: TOGGLE_ADD_TABLE
+export const passTableId = id => ({
+  type: PASS_TABLE_ID,
+  payload: { id }
+})
+
+export const unsetTableId = () => ({
+  type: UNSET_TABLE_ID
 })

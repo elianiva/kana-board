@@ -2,7 +2,12 @@ import React, { useState } from "react"
 import PropType from "prop-types"
 import Button from "./Button"
 import { useDispatch } from "react-redux"
-import { toggleAddItem, removeItem, editItem } from "../store/actions"
+import {
+  toggleAddItem,
+  removeItem,
+  editItem,
+  passTableId
+} from "../store/actions"
 
 export default function Table({ data, onClick }) {
   const dispatch = useDispatch()
@@ -36,17 +41,9 @@ export default function Table({ data, onClick }) {
               <tr className="p-2 odd:bg-gray-200 border-b-2" key={col._id}>
                 <td className="p-2">{col.kana}</td>
                 <td className="p-2">{col.meaning}</td>
-                <td className="p-2">
-                  {col.example[0]}
-                  <br />
-                  {col.example[1]}
-                </td>
+                <td className="p-2">{col.example}</td>
                 <td className="p-2">{col.context}</td>
-                <td className="p-2">
-                  {col.myExample[0]}
-                  <br />
-                  {col.myExample[1]}
-                </td>
+                <td className="p-2">{col.myExample}</td>
                 <td className="p-2 flex">
                   <Button
                     type="remove"
@@ -64,7 +61,13 @@ export default function Table({ data, onClick }) {
             ))}
             <tr>
               <td colSpan="6">
-                <Button type="add" onClick={() => dispatch(toggleAddItem())} />
+                <Button
+                  type="add"
+                  onClick={() => {
+                    dispatch(toggleAddItem())
+                    dispatch(passTableId(data._id))
+                  }}
+                />
               </td>
             </tr>
           </tbody>
