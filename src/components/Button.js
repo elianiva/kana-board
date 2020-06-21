@@ -4,7 +4,7 @@ import Trash from "../assets/trash.svg"
 import Edit from "../assets/edit.svg"
 import Add from "../assets/add.svg"
 
-export default function Button({ type, onClick }) {
+export default function Button({ type, onClick, text }) {
   switch (type) {
     case "add":
       return (
@@ -18,7 +18,7 @@ export default function Button({ type, onClick }) {
     case "edit":
       return (
         <div
-          className="w-full p-2 mx-1 my-4 rounded-md  bg-green-300 hover:bg-green-400 text-blue-800 cursor-pointer font-bold flex items-center justify-center"
+          className="p-2 mx-1 my-4 rounded-md  bg-green-300 hover:bg-green-400 text-blue-800 cursor-pointer font-bold flex items-center justify-center"
           onClick={onClick}
         >
           <Edit width="18" height="18" />
@@ -27,7 +27,7 @@ export default function Button({ type, onClick }) {
     case "remove":
       return (
         <div
-          className="w-full p-2 mx-1 my-4 rounded-md  bg-red-300 hover:bg-red-400 text-blue-800 cursor-pointer font-bold flex items-center justify-center"
+          className="p-2 mx-1 my-4 rounded-md  bg-red-300 hover:bg-red-400 text-blue-800 cursor-pointer font-bold flex items-center justify-center"
           onClick={onClick}
         >
           <Trash width="18" height="18" />
@@ -42,13 +42,13 @@ export default function Button({ type, onClick }) {
           Add New Table
         </div>
       )
-    case "addItem":
+    case "confirm":
       return (
         <div
           className="w-24 p-2 rounded-md  bg-green-300 hover:bg-green-400 text-blue-800 cursor-pointer"
           onClick={onClick}
         >
-          Add
+          {text}
         </div>
       )
     case "cancel":
@@ -57,7 +57,7 @@ export default function Button({ type, onClick }) {
           className="mr-4 w-24 p-2 rounded-md  bg-gray-200 hover:bg-gray-300 text-blue-800 cursor-pointer"
           onClick={onClick}
         >
-          Cancel
+          {text}
         </div>
       )
     default:
@@ -67,5 +67,6 @@ export default function Button({ type, onClick }) {
 
 Button.propTypes = {
   type: PropType.string.isRequired,
-  onClick: PropType.func.isRequired
+  onClick: PropType.func.isRequired,
+  text: PropType.string
 }

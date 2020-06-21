@@ -72,13 +72,15 @@ export default function ItemForm() {
               dispatch(unsetTableId())
               dispatch(toggleAddItem())
             }}
+            text="Cancel"
           />
           <Button
-            type="addItem"
+            type="confirm"
             onClick={() => {
               dispatch(addItem(currentTableId, item))
               dispatch(toggleAddItem())
             }}
+            text="Add"
           />
         </div>
       </div>
