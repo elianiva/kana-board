@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode productin",
+    "build:full": "webpack --mode productin",
+    "build:css": "tailwindcss build src/style/tailwind.css -o src/styles/styles.css",
     "start": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,6 +32,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
+    "react-string-replace": "^0.4.4",
     "redux": "^4.0.5",
     "uuid": "^8.1.0"
   }

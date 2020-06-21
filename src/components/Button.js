@@ -9,7 +9,7 @@ export default function Button({ type, onClick }) {
     case "add":
       return (
         <div
-          className="w-full p-2 my-2 rounded-md  bg-blue-300 hover:bg-blue-400 text-blue-800 cursor-pointer font-bold flex items-center justify-center font-thin"
+          className="w-full p-2 my-2 text-gray-600 hover:text-gray-800 cursor-pointer font-bold flex items-center justify-center font-thin"
           onClick={onClick}
         >
           Add New Item
@@ -36,7 +36,7 @@ export default function Button({ type, onClick }) {
     case "table":
       return (
         <div
-          className="w-full p-4 my-4 rounded-md  bg-gray-200 hover:bg-gray-300 text-blue-800 cursor-pointer"
+          className="w-full p-3 my-4 text-gray-400 hover:text-gray-600 cursor-pointer font-hairline text-4xl new-table"
           onClick={onClick}
         >
           Add New Table

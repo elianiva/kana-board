@@ -4,6 +4,7 @@ dependencies:
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
   react-redux: 7.2.0_49f644e2f7de4182503f8b93abece808
+  react-string-replace: 0.4.4
   redux: 4.0.5
   uuid: 8.1.0
 devDependencies:
@@ -3711,7 +3712,6 @@ packages:
     resolution:
       integrity: sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
   /lodash/4.17.15:
-    dev: true
     resolution:
       integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
   /loglevel/1.6.8:
@@ -4720,6 +4720,14 @@ packages:
         optional: true
     resolution:
       integrity: sha512-EvCAZYGfOLqwV7gh849xy9/pt55rJXPwmYvI4lilPM5rUT/1NxuuN59ipdBksRVSvz0KInbPnp4IfoXJXCqiDA==
+  /react-string-replace/0.4.4:
+    dependencies:
+      lodash: 4.17.15
+    dev: false
+    engines:
+      node: '>=0.12.0'
+    resolution:
+      integrity: sha512-FAMkhxmDpCsGTwTZg7p/2v+/GTmxAp73so3fbSvlAcBBX36ujiGRNEaM/1u+jiYQrArhns+7eE92g2pi5E5FUA==
   /react-svg-core/3.0.3:
     dependencies:
       '@babel/core': 7.10.2
@@ -6042,6 +6050,7 @@ specifiers:
   react: ^16.13.1
   react-dom: ^16.13.1
   react-redux: ^7.2.0
+  react-string-replace: ^0.4.4
   react-svg-loader: ^3.0.3
   redux: ^4.0.5
   style-loader: ^1.2.1
