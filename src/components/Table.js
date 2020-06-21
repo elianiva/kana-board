@@ -3,28 +3,60 @@ import ReactStringReplace from "react-string-replace"
 import PropType from "prop-types"
 import Button from "./Button"
 import { useDispatch } from "react-redux"
+import { format } from "date-fns"
 import {
   toggleAddItem,
   removeItem,
+  removeTable,
   editItem,
   passTableId
 } from "../store/actions"
+import Trash from "../assets/trash.svg"
 
 export default function Table({ data, onClick }) {
   const dispatch = useDispatch()
-  const [isOpen, setOpen] = useState(true)
+  const [isOpen, setOpen] = useState(false)
+  const [isPrompted, setPrompt] = useState(false)
 
   return (
     <div className="mt-2">
-      <div className="w-full text-left bg-gray-100 px-4 py-2 rounded-t-md flex items-center font-light">
-        <span className="flex-auto text-gray-800">{data.date}</span>
+      <div
+        className={`flex w-full text-left py-2 rounded-md items-center font-light cursor-pointer hover:text-blue-500
+        ${!isOpen ? "bg-gray-100 px-4" : "px-0"}`}
+        onClick={() => setOpen(!isOpen)}
+      >
+        <span className="flex-auto w-6 text-gray-800">{data.date}</span>
+        {isOpen ? "-" : "+"}
         <button
-          className="text-xl text-gray-600 px-3 rounded-md cursor-pointer"
-          onClick={() => setOpen(!isOpen)}
+          className="text-xl text-gray-600 px-3 rounded-md cursor-pointer relative z-2"
+          onClick={() => {
+            setPrompt(true)
+          }}
         >
-          {isOpen ? "-" : "+"}
+          <Trash width="18" height="18" />
         </button>
       </div>
+      {isPrompted && (
+        <div className="fixed top-0 bottom-0 left-0 right-0 bg-opacity-75 z-10 bg-gray-900 flex items-center justify-center p-5">
+          <div className="relative p-5 bg-white z-20 rounded rounded-md">
+            <h2 className="text-2xl text-red-800">Are You Sure?</h2>
+            <div className="flex">
+              <Button
+                type="cancel"
+                onClick={() => {
+                  setPrompt(false)
+                }}
+                text="No"
+              />
+              <Button
+                type="confirm"
+                onClick={() => dispatch(removeTable(data._id))}
+                text="Yes"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       {isOpen && (
         <table className="w-full mx-auto text-left font-medium rounded-md mb-4 text-gray-800">
           <thead>
@@ -58,8 +90,7 @@ export default function Table({ data, onClick }) {
                   <Button
                     type="remove"
                     onClick={() => {
-                      dispatch(removeItem(col._id))
-                      console.log(col._id)
+                      dispatch(removeItem(data._id, col._id))
                     }}
                   />
                   <Button
@@ -69,17 +100,19 @@ export default function Table({ data, onClick }) {
                 </td>
               </tr>
             ))}
-            <tr>
-              <td colSpan="7" className="bg-gray-100">
-                <Button
-                  type="add"
-                  onClick={() => {
-                    dispatch(toggleAddItem())
-                    dispatch(passTableId(data._id))
-                  }}
-                />
-              </td>
-            </tr>
+            {format(new Date(), "iiii, dd MMMM yyyy") === data.date && (
+              <tr>
+                <td colSpan="7" className="bg-gray-100">
+                  <Button
+                    type="add"
+                    onClick={() => {
+                      dispatch(toggleAddItem())
+                      dispatch(passTableId(data._id))
+                    }}
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}

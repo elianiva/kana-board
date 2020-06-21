@@ -1,6 +1,7 @@
 import {
   ADD_ITEM,
   REMOVE_ITEM,
+  REMOVE_TABLE,
   EDIT_ITEM,
   ADD_TABLE,
   TOGGLE_ADD_ITEM,
@@ -13,9 +14,9 @@ export const addItem = (id, data) => ({
   payload: { id, data }
 })
 
-export const removeItem = id => ({
+export const removeItem = (tableId, itemId) => ({
   type: REMOVE_ITEM,
-  payload: { id }
+  payload: { tableId, itemId }
 })
 
 export const editItem = id => ({
@@ -29,6 +30,11 @@ export const addTable = () => ({
 
 export const toggleAddItem = () => ({
   type: TOGGLE_ADD_ITEM
+})
+
+export const removeTable = id => ({
+  type: REMOVE_TABLE,
+  payload: { id }
 })
 
 export const passTableId = id => ({

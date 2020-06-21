@@ -1,6 +1,7 @@
 import {
   ADD_ITEM,
   REMOVE_ITEM,
+  REMOVE_TABLE,
   EDIT_ITEM,
   ADD_TABLE,
   TOGGLE_ADD_ITEM,
@@ -47,7 +48,7 @@ const colReducer = (cols, action) => {
         }
       ]
     case REMOVE_ITEM:
-      return cols.filter(col => col._id !== action.payload.id)
+      return cols.filter(col => col._id !== action.payload.itemId)
     case EDIT_ITEM:
       let filtered = cols.filter(id => id !== action.id)
       return [
@@ -84,21 +85,25 @@ export const tableReducer = (state = initialState, action) => {
       return {
         ...state,
         items: state.items.map(item => {
-          // if (item._id == action.payload.id) {
-          return {
-            _id: item._id,
-            date: item.date,
-            cols: colReducer(item.cols, action)
+          if (item._id == action.payload.tableId) {
+            return {
+              _id: item._id,
+              date: item.date,
+              cols: colReducer(item.cols, action)
+            }
           }
-          // }
-          // return item
+          return item
         })
+      }
+    case REMOVE_TABLE:
+      return {
+        ...state,
+        items: state.items.filter(item => item._id !== action.payload.id)
       }
     case ADD_ITEM:
       return {
         ...state,
         items: state.items.map(item => {
-          // debugger
           if (item._id === action.payload.id) {
             return {
               _id: item._id,
@@ -106,7 +111,7 @@ export const tableReducer = (state = initialState, action) => {
               cols: colReducer(item.cols, action)
             }
           }
-          // return item
+          return item
         })
       }
     case TOGGLE_ADD_ITEM:
