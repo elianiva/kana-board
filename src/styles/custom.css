@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
 * {
-  transition: all ease-out 0.2s;
+  transition: all ease-out 0.25s;
 }
 
 h1,
@@ -12,9 +12,19 @@ h1,
 
 body {
   font-family: "PT Sans", sans-serif;
-  transition: all ease-out 0.2s;
+  transition: all ease-out 0.25s;
 }
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+div::-webkit-scrollbar {
+  height: 0.25rem;
+  background-color: #f4f4f4;
+}
+
+div::-webkit-scrollbar-thumb {
+  height: 0.25rem;
+  background-color: #5c90ff;
 }

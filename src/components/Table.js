@@ -28,8 +28,9 @@ export default function Table({ data, onClick }) {
         <span className="flex-auto w-6 text-gray-800">{data.date}</span>
         {isOpen ? "-" : "+"}
         <button
-          className="text-xl text-gray-600 px-3 rounded-md cursor-pointer relative z-2"
-          onClick={() => {
+          className="text-xl text-gray-600 px-3 rounded-md cursor-pointer"
+          onClick={e => {
+            e.stopPropagation()
             setPrompt(true)
           }}
         >
@@ -37,7 +38,7 @@ export default function Table({ data, onClick }) {
         </button>
       </div>
       {isPrompted && (
-        <div className="fixed top-0 bottom-0 left-0 right-0 bg-opacity-75 z-10 bg-gray-900 flex items-center justify-center p-5">
+        <div className="fixed top-0 bottom-0 left-0 right-0 bg-opacity-75 z-10 bg-gray-900 flex items-center justify-center p-5 ">
           <div className="relative p-5 bg-white z-20 rounded rounded-md">
             <h2 className="text-2xl text-red-800">Are You Sure?</h2>
             <div className="flex">
@@ -57,8 +58,8 @@ export default function Table({ data, onClick }) {
           </div>
         </div>
       )}
-      {isOpen && (
-        <table className="w-full mx-auto text-left font-medium rounded-md mb-4 text-gray-800">
+      <div className={`overflow-x-auto mb-4 ${isOpen ? "block" : "hidden"}`}>
+        <table className="w-full mx-auto text-left font-medium rounded-md text-gray-800">
           <thead>
             <tr className="py-2 px-4 bg-blue-500">
               <th className="py-2 px-4 text-white">No.</th>
@@ -81,7 +82,9 @@ export default function Table({ data, onClick }) {
                 <td className="py-2 px-4">{col.meaning}</td>
                 <td className="py-2 px-4">
                   {ReactStringReplace(col.example, col.kana, match => (
-                    <span className="font-bold text-blue-500">{match}</span>
+                    <span className="font-bold text-blue-500" key={col._id}>
+                      {match}
+                    </span>
                   ))}
                 </td>
                 <td className="py-2 px-4">{col.context}</td>
@@ -115,7 +118,7 @@ export default function Table({ data, onClick }) {
             )}
           </tbody>
         </table>
-      )}
+      </div>
     </div>
   )
 }
