@@ -4,22 +4,25 @@ import {
   REMOVE_TABLE,
   EDIT_ITEM,
   ADD_TABLE,
-  TOGGLE_ADD_ITEM,
+  TOGGLE_FORM,
   PASS_TABLE_ID,
-  UNSET_TABLE_ID
+  UNSET_TABLE_ID,
+  PASS_ITEM_ID,
+  UNSET_ITEM_ID
 } from "./types"
 import { format } from "date-fns"
 import { combineReducers } from "redux"
 import { v4 as uuidv4 } from "uuid"
 
 export const initialState = {
-  addItem: false,
+  isFormOpened: false,
   currentTable: "",
-  items: [
+  currentItem: "",
+  tables: [
     {
       _id: "dfb5871c-e260-4e76-98f1-92db862c2741",
       date: "Sunday, 14 June 2020",
-      cols: [
+      items: [
         {
           _id: "e4f5b8bc-86ab-4d22-9fee-e6310f516b58",
           kana: "かわいい",
@@ -33,11 +36,11 @@ export const initialState = {
   ]
 }
 
-const colReducer = (cols, action) => {
+const itemReducer = (items, action) => {
   switch (action.type) {
     case ADD_ITEM:
       return [
-        ...cols,
+        ...items,
         {
           _id: uuidv4(),
           kana: action.payload.data.kana,
@@ -48,22 +51,22 @@ const colReducer = (cols, action) => {
         }
       ]
     case REMOVE_ITEM:
-      return cols.filter(col => col._id !== action.payload.itemId)
+      return items.filter(item => item._id !== action.payload.itemId)
     case EDIT_ITEM:
-      let filtered = cols.filter(id => id !== action.id)
+      let filtered = items.filter(item => item._id !== action.payload.itemId)
       return [
         ...filtered,
         {
           _id: uuidv4(),
-          kana: action.data.kana,
-          meaning: action.data.meaning,
-          example: action.data.example,
-          context: action.data.context,
-          myExample: action.data.myExample
+          kana: action.payload.data.kana,
+          meaning: action.payload.data.meaning,
+          example: action.payload.data.example,
+          context: action.payload.data.context,
+          myExample: action.payload.data.myExample
         }
       ]
     default:
-      return cols
+      return items
   }
 }
 
@@ -72,52 +75,53 @@ export const tableReducer = (state = initialState, action) => {
     case ADD_TABLE:
       return {
         ...state,
-        items: [
-          ...state.items,
+        tables: [
+          ...state.tables,
           {
             _id: uuidv4(),
             date: format(new Date(), "iiii, dd MMMM yyyy"),
-            cols: []
+            items: []
           }
         ]
       }
     case REMOVE_ITEM:
       return {
         ...state,
-        items: state.items.map(item => {
-          if (item._id == action.payload.tableId) {
+        tables: state.tables.map(table => {
+          if (table._id == action.payload.tableId) {
             return {
-              _id: item._id,
-              date: item.date,
-              cols: colReducer(item.cols, action)
+              _id: table._id,
+              date: table.date,
+              items: itemReducer(table.items, action)
             }
           }
-          return item
+          return table
         })
       }
     case REMOVE_TABLE:
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.payload.id)
+        tables: state.tables.filter(table => table._id !== action.payload.id)
       }
     case ADD_ITEM:
+    case EDIT_ITEM:
       return {
         ...state,
-        items: state.items.map(item => {
-          if (item._id === action.payload.id) {
+        tables: state.tables.map(table => {
+          if (table._id === action.payload.tableId) {
             return {
-              _id: item._id,
-              date: item.date,
-              cols: colReducer(item.cols, action)
+              _id: table._id,
+              date: table.date,
+              items: itemReducer(table.items, action)
             }
           }
-          return item
+          return table
         })
       }
-    case TOGGLE_ADD_ITEM:
+    case TOGGLE_FORM:
       return {
         ...state,
-        addItem: !state.addItem
+        isFormOpened: !state.isFormOpened
       }
     case PASS_TABLE_ID:
       return {
@@ -128,6 +132,16 @@ export const tableReducer = (state = initialState, action) => {
       return {
         ...state,
         currentTable: ""
+      }
+    case PASS_ITEM_ID:
+      return {
+        ...state,
+        currentItem: action.payload.id
+      }
+    case UNSET_ITEM_ID:
+      return {
+        ...state,
+        currentItem: ""
       }
     default:
       return state

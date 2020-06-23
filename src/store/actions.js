@@ -4,14 +4,21 @@ import {
   REMOVE_TABLE,
   EDIT_ITEM,
   ADD_TABLE,
-  TOGGLE_ADD_ITEM,
+  TOGGLE_FORM,
   PASS_TABLE_ID,
-  UNSET_TABLE_ID
+  UNSET_TABLE_ID,
+  PASS_ITEM_ID,
+  UNSET_ITEM_ID
 } from "./types"
 
-export const addItem = (id, data) => ({
+export const addItem = (tableId, data) => ({
   type: ADD_ITEM,
-  payload: { id, data }
+  payload: { tableId, data }
+})
+
+export const editItem = (tableId, itemId, data) => ({
+  type: EDIT_ITEM,
+  payload: { tableId, itemId, data }
 })
 
 export const removeItem = (tableId, itemId) => ({
@@ -19,17 +26,13 @@ export const removeItem = (tableId, itemId) => ({
   payload: { tableId, itemId }
 })
 
-export const editItem = id => ({
-  type: EDIT_ITEM,
-  payload: id
-})
-
 export const addTable = () => ({
   type: ADD_TABLE
 })
 
-export const toggleAddItem = () => ({
-  type: TOGGLE_ADD_ITEM
+export const toggleForm = data => ({
+  type: TOGGLE_FORM,
+  payload: { data }
 })
 
 export const removeTable = id => ({
@@ -44,4 +47,13 @@ export const passTableId = id => ({
 
 export const unsetTableId = () => ({
   type: UNSET_TABLE_ID
+})
+
+export const passItemId = id => ({
+  type: PASS_ITEM_ID,
+  payload: { id }
+})
+
+export const unsetItemId = () => ({
+  type: UNSET_ITEM_ID
 })

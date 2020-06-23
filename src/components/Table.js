@@ -5,11 +5,11 @@ import Button from "./Button"
 import { useDispatch } from "react-redux"
 import { format } from "date-fns"
 import {
-  toggleAddItem,
+  toggleForm,
   removeItem,
   removeTable,
-  editItem,
-  passTableId
+  passTableId,
+  passItemId
 } from "../store/actions"
 import Trash from "../assets/trash.svg"
 
@@ -68,39 +68,47 @@ export default function Table({ data, onClick }) {
               <th className="py-2 px-4 text-white">Example</th>
               <th className="py-2 px-4 text-white">Context</th>
               <th className="py-2 px-4 text-white">Personal Example</th>
-              <th className="py-2 px-4 text-white">Action</th>
+              {format(new Date(), "iiii, dd MMMM yyyy") === data.date && (
+                <th className="py-2 px-4 text-white">Action</th>
+              )}
             </tr>
           </thead>
           <tbody>
-            {data.cols.map((col, index) => (
+            {data.items.map((item, index) => (
               <tr
                 className="py-2 px-4 bg-gray-100 even:bg-gray-200"
-                key={col._id}
+                key={index}
               >
                 <td className="py-2 px-4">{index + 1}.</td>
-                <td className="py-2 px-4">{col.kana}</td>
-                <td className="py-2 px-4">{col.meaning}</td>
+                <td className="py-2 px-4">{item.kana}</td>
+                <td className="py-2 px-4">{item.meaning}</td>
                 <td className="py-2 px-4">
-                  {ReactStringReplace(col.example, col.kana, match => (
-                    <span className="font-bold text-blue-500" key={col._id}>
+                  {ReactStringReplace(item.example, item.kana, match => (
+                    <span className="font-bold text-blue-500" key={item._id}>
                       {match}
                     </span>
                   ))}
                 </td>
-                <td className="py-2 px-4">{col.context}</td>
-                <td className="py-2 px-4">{col.myExample}</td>
-                <td className="py-2 px-4 flex">
-                  <Button
-                    type="remove"
-                    onClick={() => {
-                      dispatch(removeItem(data._id, col._id))
-                    }}
-                  />
-                  <Button
-                    type="edit"
-                    onClick={() => dispatch(editItem(col._id))}
-                  />
-                </td>
+                <td className="py-2 px-4">{item.context}</td>
+                <td className="py-2 px-4">{item.myExample}</td>
+                {format(new Date(), "iiii, dd MMMM yyyy") === data.date && (
+                  <td className="py-2 px-4 flex">
+                    <Button
+                      type="remove"
+                      onClick={() => {
+                        dispatch(removeItem(data._id, item._id))
+                      }}
+                    />
+                    <Button
+                      type="edit"
+                      onClick={() => {
+                        dispatch(toggleForm())
+                        dispatch(passTableId(data._id))
+                        dispatch(passItemId(item._id))
+                      }}
+                    />
+                  </td>
+                )}
               </tr>
             ))}
             {format(new Date(), "iiii, dd MMMM yyyy") === data.date && (
@@ -109,7 +117,7 @@ export default function Table({ data, onClick }) {
                   <Button
                     type="add"
                     onClick={() => {
-                      dispatch(toggleAddItem())
+                      dispatch(toggleForm())
                       dispatch(passTableId(data._id))
                     }}
                   />
