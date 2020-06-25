@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:full": "webpack --mode production",
-    "build:css-prod": "NODE_ENV=production tailwindcss build src/style/tailwind.css -o src/styles/styles.css",
-    "build:css-devel": "NODE_ENV=development tailwindcss build src/style/tailwind.css -o src/styles/styles.css",
+    "build:css-prod": "NODE_ENV=production tailwindcss build ./src/styles/tailwind.css -o src/styles/styles.css",
+    "build:css-devel": "NODE_ENV=development tailwindcss build ./src/styles/tailwind.css -o src/styles/styles.css",
     "start": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
