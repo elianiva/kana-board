@@ -51,6 +51,15 @@ export default function Button({ type, onClick, text }) {
           {text}
         </div>
       )
+    case "delete":
+      return (
+        <div
+          className="w-24 p-2 rounded-md  bg-red-300 hover:bg-red-400 text-blue-800 cursor-pointer"
+          onClick={onClick}
+        >
+          {text}
+        </div>
+      )
     case "cancel":
       return (
         <div

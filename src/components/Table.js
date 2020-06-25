@@ -40,7 +40,7 @@ export default function Table({ data, onClick }) {
       {isPrompted && (
         <div className="fixed top-0 bottom-0 left-0 right-0 bg-opacity-75 z-10 bg-gray-900 flex items-center justify-center p-5 ">
           <div className="relative p-5 bg-white z-20 rounded rounded-md">
-            <h2 className="text-2xl text-red-800">Are You Sure?</h2>
+            <h2 className="text-2xl text-blue-800 mb-4">Are You Sure?</h2>
             <div className="flex">
               <Button
                 type="cancel"
@@ -50,7 +50,7 @@ export default function Table({ data, onClick }) {
                 text="No"
               />
               <Button
-                type="confirm"
+                type="delete"
                 onClick={() => dispatch(removeTable(data._id))}
                 text="Yes"
               />
