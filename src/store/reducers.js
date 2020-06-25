@@ -21,7 +21,7 @@ export const initialState = {
   tables: [
     {
       _id: "dfb5871c-e260-4e76-98f1-92db862c2741",
-      date: "Sunday, 14 June 2020",
+      date: "Wed, 24 June 2020",
       items: [
         {
           _id: "e4f5b8bc-86ab-4d22-9fee-e6310f516b58",
