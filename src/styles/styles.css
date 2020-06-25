@@ -8360,6 +8360,10 @@ video {
   .sm\:w-11\/12 {
     width: 91.666667%;
   }
+
+  .sm\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px) {

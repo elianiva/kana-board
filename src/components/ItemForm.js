@@ -40,7 +40,7 @@ export default function ItemForm({ data }) {
     <div className="fixed top-0 bottom-0 left-0 right-0 bg-opacity-75 z-10 bg-gray-900 flex items-center justify-center p-5">
       <div className="relative p-5 bg-white z-20 rounded rounded-md">
         <h2 className="text-2xl text-gray-800">Add New Item</h2>
-        <form autoComplete="off" className="grid grid-cols-5">
+        <form autoComplete="off" className="grid grid-cols-1 sm:grid-cols-5">
           <Form
             label="Kana"
             name="kana"
